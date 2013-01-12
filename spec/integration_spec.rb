@@ -12,7 +12,12 @@ describe PDF::TrimDetector do
     end
 
     it "should detect the trim marks" do
-      detector.trim.should == [0, 0, 100, 100]
+      detector.trim.should == [
+          BigDecimal.new('169.4'),
+          BigDecimal.new('71.8'),
+          BigDecimal.new('1053.4'),
+          BigDecimal.new('719.9')
+        ]
     end
   end
 end
