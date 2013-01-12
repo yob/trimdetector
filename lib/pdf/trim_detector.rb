@@ -26,7 +26,7 @@ module PDF
       @state = PDF::Reader::PageState.new(page)
       @paths = []
       @trim  = nil
-      @current_path = nil
+      @current_paths = []
     end
 
     def trim
@@ -42,28 +42,30 @@ module PDF
       end
     end
 
-    def begin_new_subpath(x, y)
-      @current_path = Path.new
+    def begin_new_subpath(x, y) # m
+      @current_paths << Path.new
       x, y = @state.ctm_transform(x, y)
-      @current_path.add_point(x, y)
+      @current_paths.last.add_point(x, y)
     end
 
-    def append_line(x, y)
-      x, y = @state.ctm_transform(x, y)
-      @current_path.add_point(x, y)
+    def append_line(x, y) # l
+      if @current_paths.last
+        x, y = @state.ctm_transform(x, y)
+        @current_paths.last.add_point(x, y)
+      end
     end
 
     def fill_stroke # B
-      if @current_path
-        # TODO set the path colour
-        @paths << @current_path
+      # TODO set the path colour
+      while path = @current_paths.shift
+        @paths << path
       end
     end
 
     def stroke_path # S
-      if @current_path
-        # TODO set the path colour
-        @paths << @current_path
+      # TODO set the path colour
+      while path = @current_paths.shift
+        @paths << path
       end
     end
 
@@ -87,13 +89,13 @@ module PDF
 
     def x_with_two_paths
       grouped_vertical_paths.map { |x, paths|
-        paths.size == 2 ? x : nil
+        paths.size >= 2 ? x : nil
       }.compact.sort
     end
 
     def y_with_two_paths
       grouped_horizontal_paths.map { |y, paths|
-        paths.size == 2 ? y : nil
+        paths.size >= 2 ? y : nil
       }.compact.sort
     end
 

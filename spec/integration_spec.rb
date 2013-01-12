@@ -42,3 +42,24 @@ describe PDF::TrimDetector do
     end
   end
 end
+
+describe PDF::TrimDetector do
+  context "with trim_marks_with_multiple_subpaths.pdf" do
+    let!(:detector) { PDF::TrimDetector.new}
+
+    before do
+      PDF::Reader.open(pdf_spec_file("trim_marks_with_multiple_subpaths")) do |pdf|
+        pdf.page(1).walk(detector)
+      end
+    end
+
+    it "should detect the trim marks" do
+      detector.trim.should == [
+          BigDecimal.new('42'),
+          BigDecimal.new('42'),
+          BigDecimal.new('474'),
+          BigDecimal.new('690')
+        ]
+    end
+  end
+end
