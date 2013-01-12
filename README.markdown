@@ -21,3 +21,8 @@ marks drawn on the page but no matching page box (TrimBox, ArtBox, etc)
         puts detector.trim.inspect
       end
     end
+
+== Licensing
+
+This library is distributed under the terms of the MIT License. See the included file for
+more detail.
