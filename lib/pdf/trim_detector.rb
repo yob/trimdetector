@@ -30,8 +30,8 @@ module PDF
     end
 
     def trim
-      xes = x_with_two_paths
-      yes = y_with_two_paths
+      xes = outer_x_candidates
+      yes = outer_y_candidates
       if xes.size == 2 && yes.size == 2
         [
           xes.sort.first,
@@ -95,6 +95,24 @@ module PDF
       grouped_horizontal_paths.map { |y, paths|
         paths.size == 2 ? y : nil
       }.compact.sort
+    end
+
+    def outer_x_candidates
+      xes = x_with_two_paths
+      if xes.size >= 2
+        [xes.first, xes.last]
+      else
+        xes
+      end
+    end
+
+    def outer_y_candidates
+      yes = y_with_two_paths
+      if yes.size >= 2
+        [yes.first, yes.last]
+      else
+        yes
+      end
     end
 
     class Point
