@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.description       = "Attempt to detect the region of a PDF page indicated by trim marks"
   s.author            = "James Healy"
   s.email             = ["james@yob.id.au"]
-  #s.homepage          = "http://github.com/yob/pdf-preflight"
+  s.homepage          = "http://github.com/yob/trimdetector"
   s.has_rdoc          = true
   s.rdoc_options      << "--title" << "PDF::TrimDetector" << "--line-numbers"
   s.files             = Dir.glob("lib/**/*") + Dir.glob("bin/*") + ["README.markdown", "CHANGELOG"]
