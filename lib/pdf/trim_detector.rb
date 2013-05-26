@@ -80,22 +80,22 @@ module PDF
     end
 
     def grouped_vertical_paths
-      vertical_paths.group_by { |path| path.start.x }
+      vertical_paths.group_by { |path| path.start.x.to_i }
     end
 
     def grouped_horizontal_paths
-      horizontal_paths.group_by { |path| path.start.y }
+      horizontal_paths.group_by { |path| path.start.y.to_i }
     end
 
     def x_with_two_paths
       grouped_vertical_paths.map { |x, paths|
-        paths.size >= 2 ? x : nil
+        paths.size >= 2 ? paths.first.start.x : nil
       }.compact.sort
     end
 
     def y_with_two_paths
       grouped_horizontal_paths.map { |y, paths|
-        paths.size >= 2 ? y : nil
+        paths.size >= 2 ? paths.first.start.y : nil
       }.compact.sort
     end
 

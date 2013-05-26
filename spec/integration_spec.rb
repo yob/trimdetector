@@ -13,11 +13,11 @@ describe PDF::TrimDetector do
 
     it "should detect the trim marks" do
       detector.trim.should == [
-          BigDecimal.new('169.4'),
-          BigDecimal.new('71.8'),
-          BigDecimal.new('1053.4'),
-          BigDecimal.new('719.9')
-        ]
+        BigDecimal.new('169.4'),
+        BigDecimal.new('71.8'),
+        BigDecimal.new('1053.4'),
+        BigDecimal.new('719.9')
+      ]
     end
   end
 end
@@ -34,11 +34,11 @@ describe PDF::TrimDetector do
 
     it "should detect the trim marks" do
       detector.trim.should == [
-          BigDecimal.new('169.4'),
-          BigDecimal.new('71.8'),
-          BigDecimal.new('1053.4'),
-          BigDecimal.new('719.9')
-        ]
+        BigDecimal.new('169.4'),
+        BigDecimal.new('71.8'),
+        BigDecimal.new('1053.4'),
+        BigDecimal.new('719.9')
+      ]
     end
   end
 end
